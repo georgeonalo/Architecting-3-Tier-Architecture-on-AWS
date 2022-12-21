@@ -67,6 +67,61 @@ To check that the instance is running with a webpage, grab the IPv4 address and 
 
 ![image](https://user-images.githubusercontent.com/115881685/208875441-08ca24a9-09f8-45df-86aa-0e87ac72835f.png)
 
+And it works! Thus completing the Web tier of our architecture.
+
+
+###### Step 3
+
+Now on to the Application tier. In this section we will put EC2 instances, via a Auto Scaling group, into 2 private subnets. Note that this is not a true application tier as we don’t have any provided code to run on the EC2 instances.
+
+Navigate to Create launch template. I will use the same AMI and instance type as the previous launch template. Associate a key pair and then we will create a security group. This time since these are private subnets we will want to only allow access from our web tier security group and to SSH. As shown below.
+
+![image](https://user-images.githubusercontent.com/115881685/208896861-a00e8163-da80-4fd0-8c67-b076f5f90786.png)
+
+
+![image](https://user-images.githubusercontent.com/115881685/208896912-7af838ba-c26e-47ce-8f99-10935b3c38f7.png)
+
+We can now create the launch template. Then in ASG choose our new template we just created. Click Next and choose launch options. Choose the correct VPC and this time choose 2 private subnets to launch our instances in to.
+
+![image](https://user-images.githubusercontent.com/115881685/208897026-19ca37a0-73b8-4fc1-ae75-bb6bc042c34c.png)
+
+
+Use the same options as the web tier ASG and create your auto scaling group. You will now have 2 Auto Scaling groups.
+
+![image](https://user-images.githubusercontent.com/115881685/208897127-2b8262bc-cbcd-4bff-a6bd-619c6c675bf9.png)
+
+And 2 new instances!
+
+![image](https://user-images.githubusercontent.com/115881685/208897184-9eb6eed1-ab07-4cc5-a0c7-dba1ef4b56db.png)
+
+
+To verify if we have access to the Private subnets from the public subnets we will attempt to ping a private subnet from the command line. You can do this by grabbing the public IPv4 of one of your public instances and SSH into that instance. I already have my key pair attached, you may need to add your key pair when you SSH.
+
+![image](https://user-images.githubusercontent.com/115881685/208897311-5320f39f-340f-4619-b24c-f28fc1d57103.png)
+
+
+We will then ping the Private IP address, by using ping .
+
+![image](https://user-images.githubusercontent.com/115881685/208897375-c492bad2-8522-4f34-a15c-8e9339607e84.png)
+
+It returned an amount which shows it was successful. I will now see if I can connect to my private instance using SSH forwarding agent. You can do this by adding -A when you ssh into a public instance. SSH into your public IPv4 address using the following command.
+
+ssh -A ec2-user@107.21.69.189
+
+Then SSH into the private instance from the public instance by using the private IPv4 address.
+
+![image](https://user-images.githubusercontent.com/115881685/208897618-c1f2b72e-ccb8-4824-a63e-9ee2cad562cc.png)
+
+
+It worked, we are now in the private instance! That concludes out Application tier.
+
+####### Step 4
+
+
+
+
+
+
 
 
 
