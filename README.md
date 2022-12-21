@@ -27,6 +27,50 @@ Go to your Subnets to check that you have 6 subnets total; 4 private and 2 publi
 
 #### Step 2
 
+Now we will work on our Web tier. Head over to the EC2 Dashboard > Auto Scaling Groups > Create Auto Scaling group. Here you will name your Auto Scaling group for the public EC2 instances we will create. Then click on Create a launch template.
+
+![image](https://user-images.githubusercontent.com/115881685/208874304-3efbf445-907f-4a36-8731-29e98da6e33b.png)
+
+Here you will name your public launch template, choose the AMI and instance type. I chose Amazon Linux and t2.micro. Specify your key pair. Then under Network Settings we will create a security group to allow HTTP and SSH access to our instances in the public subnets.
+
+![image](https://user-images.githubusercontent.com/115881685/208874425-6a7cd5d8-1458-49c7-bc6c-0c979186fdb8.png)
+
+![image](https://user-images.githubusercontent.com/115881685/208874550-d84e6338-799e-455b-b3f7-5b132bddd53d.png)
+
+Scroll down and under Advanced Details I will add a bootstrap to the User Data textbox. The bootstrap will install an Apache webserver on our instances and provision a webpage with a script. See bootstrap below:
+
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+echo "<html><body><h1>Welcome to the 3 Tier Architecture</h1></body></html>" > /var/www/html/index.html
+
+Click create launch template. Go back to Auto Scaling Groups and your new launch template will populate as an option. Next you will choose launch options. Select the VPC you created and select the 2 public subnets.
+
+![image](https://user-images.githubusercontent.com/115881685/208874968-591be1e0-5968-4d26-a83e-14c741121c25.png)
+
+Click Next, leave this page default and hit Next. On the Configure group size and scaling policies page; I will input 2 desired instances, 2 minimum and 5 maximum.
+
+![image](https://user-images.githubusercontent.com/115881685/208875143-ce84a27d-c8c5-495b-8276-f59040459470.png)
+
+
+Then hit next through to Review and then click create Auto Scaling group. If we go over to our instances we should have 2 running in 2 Availability zones.
+
+![image](https://user-images.githubusercontent.com/115881685/208875276-299accee-5843-4f60-aaf7-02c4db4108cc.png)
+
+
+To check that the instance is running with a webpage, grab the IPv4 address and paste it in your browser.
+
+![image](https://user-images.githubusercontent.com/115881685/208875441-08ca24a9-09f8-45df-86aa-0e87ac72835f.png)
+
+
+
+
+
+
+
+
 
 
 
