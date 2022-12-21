@@ -40,7 +40,6 @@ Here you will name your public launch template, choose the AMI and instance type
 Scroll down and under Advanced Details I will add a bootstrap to the User Data textbox. The bootstrap will install an Apache webserver on our instances and provision a webpage with a script. See bootstrap below:
 
 #!/bin/bash
-
 yum update -y
 
 systemctl start httpd
