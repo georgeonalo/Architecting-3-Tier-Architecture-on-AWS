@@ -47,11 +47,9 @@ systemctl start httpd
 
 systemctl enable httpd
 
-echo "<html><body><h1>Welcome to the 3 Tier
-  
-Architecture</h1></body></html>" >
+echo "<html><body><h1>Welcome to the 3 Tier Architecture</h1></body>
 
-/var/www/html/index.html
+</html>" > /var/www/html/index.html
 
 Click create launch template. Go back to Auto Scaling Groups and your new launch template will populate as an option. Next you will choose launch options. Select the VPC you created and select the 2 public subnets.
 
