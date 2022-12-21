@@ -127,8 +127,6 @@ I will create a Multi-AZ DB instance to provide higher availability and data red
 ![image](https://user-images.githubusercontent.com/115881685/208898646-9d7505b0-43e0-4de3-b287-a294cfb63bf2.png)
 
 
-![image](https://user-images.githubusercontent.com/115881685/208898706-eb5528d3-661c-43ac-b937-47930100bf83.png)
-
 Navigate back to the RDS dashboard and click Create Database. Select Standard create and MySQL.
 
 
@@ -137,9 +135,6 @@ Navigate back to the RDS dashboard and click Create Database. Select Standard cr
 For the template I chose Free tier. Under Settings keep them default but add a Master password for your admin. Save the password for use later. For Instance configuration and Storage keep default. Under Connectivity select your VPC and the subnet group you just created. For Public access choose “no” since this is a Private database and will only be accessible from inside the VPC. Then click to create a security group.
 
 ![image](https://user-images.githubusercontent.com/115881685/208899002-c65b1932-3803-47e3-8020-d369f75d4a39.png)
-
-
-![image](https://user-images.githubusercontent.com/115881685/208899098-914a6d2d-4acf-48e9-863c-21a20eb853e9.png)
 
 
 
