@@ -47,7 +47,7 @@ systemctl start httpd
 
 systemctl enable httpd
 
-echo "<html><body><h1>Welcome to the 3 Tier Architecture</h1></body>
+echo "<html><body><h1></h1></body>
 
 </html>" > /var/www/html/index.html
 
