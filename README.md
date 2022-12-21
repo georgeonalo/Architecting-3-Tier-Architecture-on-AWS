@@ -117,6 +117,74 @@ It worked, we are now in the private instance! That concludes out Application ti
 
 ###### Step 4
 
+For our 3rd and final tier we will add a database to the private subnets. In the AWS console navigate to Amazon RDS. From the dashboard click on Subnet groups > Create DB subnet group. Here we will create a new subnet group. Name it and select your VPC.
+
+
+![image](https://user-images.githubusercontent.com/115881685/208898551-823d2929-324b-4417-85c0-3de986f99204.png)
+
+I will create a Multi-AZ DB instance to provide higher availability and data redundancy by choosing both Availability zones. Be sure to choose the private subnets you have not used yet, that do not contain EC2 instances. Then create the group.
+
+![image](https://user-images.githubusercontent.com/115881685/208898646-9d7505b0-43e0-4de3-b287-a294cfb63bf2.png)
+
+
+![image](https://user-images.githubusercontent.com/115881685/208898706-eb5528d3-661c-43ac-b937-47930100bf83.png)
+
+Navigate back to the RDS dashboard and click Create Database. Select Standard create and MySQL.
+
+
+![image](https://user-images.githubusercontent.com/115881685/208898909-ec3311b3-9b6f-49b4-9092-858769e5d512.png)
+
+For the template I chose Free tier. Under Settings keep them default but add a Master password for your admin. Save the password for use later. For Instance configuration and Storage keep default. Under Connectivity select your VPC and the subnet group you just created. For Public access choose “no” since this is a Private database and will only be accessible from inside the VPC. Then click to create a security group.
+
+![image](https://user-images.githubusercontent.com/115881685/208899002-c65b1932-3803-47e3-8020-d369f75d4a39.png)
+
+
+![image](https://user-images.githubusercontent.com/115881685/208899098-914a6d2d-4acf-48e9-863c-21a20eb853e9.png)
+
+
+
+Click Create Database! After a moment your database will be created. Click on it and scroll to Connectivity and security. We need to edit our security group to allow inbound access from the application tier. To do this click on your database security group.
+
+
+![image](https://user-images.githubusercontent.com/115881685/208899254-3830c4f5-2bda-4ae1-9f65-0ec983d863e5.png)
+
+
+This will bring you to Security groups. Here you can edit the inbound rules.
+
+![image](https://user-images.githubusercontent.com/115881685/208899321-9a472f5c-7753-4693-bcad-cc1cfc1814a1.png)
+
+
+Change the source to your application tier security group and hit save.
+
+![image](https://user-images.githubusercontent.com/115881685/208899436-6e8a0ca3-7431-4dc1-8e6a-394e0f3e5b79.png)
+
+Now to test that our private EC2 instances from the application tier are able to access the database we will head to the command line! First you will need to SSH into one of your public subnets and include -A to add a SSH forwarding agent. Then from the public subnet SSH into one of the private subnets with your private IPv4 address.
+
+ssh -A ec2-user@10.0.139.192
+
+Here you will need to have mariadb installed to access the MySQL database. This is a simple step, type the command below.
+
+sudo yum install mariadb
+
+Now we should be able to access our database from the private instance. We can do so with the following command.
+
+mysql -h database-1.cm4bp7mgz27s.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+
+The -h is your database endpoint which can be found in the console in your database under Connectivity and security. The -P specifies the port 3306. The user, -u, is admin. You will then be prompted to enter a password, the one you created earlier for admin.
+
+![image](https://user-images.githubusercontent.com/115881685/208899781-686310a5-eef9-4197-87e7-51028e997e43.png)
+
+
+We successfully accessed the database tier from the application tier! All 3 tiers are up and running! Congratulate yourself on creating a 3 tier architecture. Now go back and tear it all down so as not to be charged.
+
+
+
+
+
+
+
+
+
 
 
 
