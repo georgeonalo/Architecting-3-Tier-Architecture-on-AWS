@@ -41,10 +41,11 @@ Scroll down and under Advanced Details I will add a bootstrap to the User Data t
 
 #!/bin/bash
 yum update -y
-yum install -y httpd
 systemctl start httpd
 systemctl enable httpd
-echo "<html><body><h1>Welcome to the 3 Tier Architecture</h1></body></html>" > /var/www/html/index.html
+echo "<html><body><h1>Welcome to the 3 Tier
+Architecture</h1></body></html>" >
+/var/www/html/index.html
 
 Click create launch template. Go back to Auto Scaling Groups and your new launch template will populate as an option. Next you will choose launch options. Select the VPC you created and select the 2 public subnets.
 
