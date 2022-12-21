@@ -115,7 +115,7 @@ Then SSH into the private instance from the public instance by using the private
 
 It worked, we are now in the private instance! That concludes out Application tier.
 
-####### Step 4
+###### Step 4
 
 
 
