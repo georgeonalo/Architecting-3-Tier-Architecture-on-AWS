@@ -7,8 +7,7 @@ AWS account
 
 Access to command line, I will be using Windows powershell
 
-### Step 1
-
+## Step 1
 First I will create a VPC. To do this navigate to VPC > Your VPCs > Create VPC. Now here we have a really fun tool where we can create a VPC with subnets and everything else we will need to create the bones of our 3 tier architecture. Click on VPC, subnets, etc. Then you can name your VPC and have it auto generate name tags for all of the resources associated with it.
 
 ![image](https://user-images.githubusercontent.com/115881685/208872346-c643cfbf-73a6-4643-a33b-e819cb13c61c.png)
@@ -25,7 +24,7 @@ Go to your Subnets to check that you have 6 subnets total; 4 private and 2 publi
 
 ![image](https://user-images.githubusercontent.com/115881685/208873006-a335e027-2f2e-43b7-9df0-7fe305733031.png)
 
-#### Step 2
+### Step 2
 
 Now we will work on our Web tier. Head over to the EC2 Dashboard > Auto Scaling Groups > Create Auto Scaling group. Here you will name your Auto Scaling group for the public EC2 instances we will create. Then click on Create a launch template.
 
@@ -39,15 +38,13 @@ Here you will name your public launch template, choose the AMI and instance type
 
 Scroll down and under Advanced Details I will add a bootstrap to the User Data textbox. The bootstrap will install an Apache webserver on our instances and provision a webpage with a script. See bootstrap below:
 
+```
 #!/bin/bash
-
 yum update -y
-
 systemctl start httpd
-
 systemctl enable httpd
-
 echo "<html><body><h1>Welcome to the 3 Tier Architecture</h1></body></html>" > /var/www/html/index.html
+```
 
 
 Click create launch template. Go back to Auto Scaling Groups and your new launch template will populate as an option. Next you will choose launch options. Select the VPC you created and select the 2 public subnets.
@@ -71,7 +68,7 @@ To check that the instance is running with a webpage, grab the IPv4 address and 
 And it works! Thus completing the Web tier of our architecture.
 
 
-###### Step 3
+## Step 3
 
 Now on to the Application tier. In this section we will put EC2 instances, via a Auto Scaling group, into 2 private subnets. Note that this is not a true application tier as we don’t have any provided code to run on the EC2 instances.
 
@@ -116,7 +113,7 @@ Then SSH into the private instance from the public instance by using the private
 
 It worked, we are now in the private instance! That concludes out Application tier.
 
-###### Step 4
+## Step 4
 
 For our 3rd and final tier we will add a database to the private subnets. In the AWS console navigate to Amazon RDS. From the dashboard click on Subnet groups > Create DB subnet group. Here we will create a new subnet group. Name it and select your VPC.
 
@@ -156,7 +153,9 @@ Change the source to your application tier security group and hit save.
 
 Now to test that our private EC2 instances from the application tier are able to access the database we will head to the command line! First you will need to SSH into one of your public subnets and include -A to add a SSH forwarding agent. Then from the public subnet SSH into one of the private subnets with your private IPv4 address.
 
+```
 ssh -A ec2-user@10.0.139.192
+```
 
 Here you will need to have mariadb installed to access the MySQL database. This is a simple step, type the command below.
 
@@ -164,7 +163,9 @@ sudo yum install mariadb
 
 Now we should be able to access our database from the private instance. We can do so with the following command.
 
+```
 mysql -h database-1.cm4bp7mgz27s.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+```
 
 The -h is your database endpoint which can be found in the console in your database under Connectivity and security. The -P specifies the port 3306. The user, -u, is admin. You will then be prompted to enter a password, the one you created earlier for admin.
 
