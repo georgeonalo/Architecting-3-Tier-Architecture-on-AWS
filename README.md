@@ -112,7 +112,11 @@ We will then ping the Private IP address, by using ping .
 
 It returned an amount which shows it was successful. I will now see if I can connect to my private instance using SSH forwarding agent. You can do this by adding -A when you ssh into a public instance. SSH into your public IPv4 address using the following command.
 
+
+```
 ssh -A ec2-user@44.199.236.130
+```
+
 
 Then SSH into the private instance from the public instance by using the private IPv4 address.
 
