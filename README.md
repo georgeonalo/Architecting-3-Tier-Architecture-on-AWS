@@ -171,7 +171,12 @@ ssh -A ec2-user@10.0.142.78
 
 Here you will need to have mariadb installed to access the MySQL database. This is a simple step, type the command below.
 
+
+```
 sudo yum install mariadb
+```
+
+
 
 Now we should be able to access our database from the private instance. We can do so with the following command.
 
