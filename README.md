@@ -108,7 +108,7 @@ To verify if we have access to the Private subnets from the public subnets we wi
 
 We will then ping the Private IP address, by using ping .
 
-![image](https://user-images.githubusercontent.com/115881685/218317879-2a9fd6e8-2a69-41af-9c74-0b98e7d72b48.png)
+![image](https://user-images.githubusercontent.com/115881685/218318817-03eacdee-8f45-4459-b854-3f72edc6f78c.png)
 
 It returned an amount which shows it was successful. I will now see if I can connect to my private instance using SSH forwarding agent. You can do this by adding -A when you ssh into a public instance. SSH into your public IPv4 address using the following command.
 
