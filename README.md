@@ -177,7 +177,7 @@ mysql -h database-1.cinrc1votzp3.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
 
 The -h is your database endpoint which can be found in the console in your database under Connectivity and security. The -P specifies the port 3306. The user, -u, is admin. You will then be prompted to enter a password, the one you created earlier for admin.
 
-![image](https://user-images.githubusercontent.com/115881685/218318469-371b18a4-6e01-45c9-88fb-3e2a3f92a7d4.png)
+![image](https://user-images.githubusercontent.com/115881685/218319366-cdd8dca5-a98c-4dbf-a646-d95938b993a4.png)
 
 
 We successfully accessed the database tier from the application tier! All 3 tiers are up and running! Congratulate yourself on creating a 3 tier architecture. Now go back and tear it all down so as not to be charged.
