@@ -8,7 +8,7 @@ In this project we will create a 3 tier architecture. It sounds intimidating but
 * Access to command line, I will be using Windows powershell
 
 ## Step 1
-First I will create a VPC. To do this navigate to VPC > Your VPCs > Create VPC. Now here we have a really fun tool where we can create a VPC with subnets and everything else we will need to create the bones of our 3 tier architecture. Click on VPC, subnets, etc. Then you can name your VPC and have it auto generate name tags for all of the resources associated with it.
+First I will create a VPC. To do this navigate to VPC > Your VPCs > Create VPC. Now here we have a really fun tool where we can create a VPC with subnets and everything else we will need to create the bones of our 3 tier architecture. Click on VPC, and more. Then you can name your VPC and have it auto generate name tags for all of the resources associated with it.
 
 ![image](https://user-images.githubusercontent.com/115881685/218316845-7f797df7-b607-4330-9b4c-6755e373cda0.png)
 
